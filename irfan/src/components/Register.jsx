@@ -12,6 +12,7 @@ export default function Register() {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [otpError, setOtpError] = useState('');
   const [seatNumber, setSeatNumber] = useState('');
+  const [joinedCommunity, setJoinedCommunity] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,8 +21,7 @@ export default function Register() {
 
   const handleSendCode = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !formData.qualification) {
-      alert('Please fill out all fields first.');
+    if (!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity) {
       return;
     }
     // Advance to OTP step
@@ -149,7 +149,83 @@ export default function Register() {
               </select>
             </div>
 
-            <button type="submit" className="btn-primary" style={{ marginTop: '12px', width: '100%' }}>
+            {/* WhatsApp Community Box */}
+            <div style={{
+              background: 'rgba(124, 58, 237, 0.05)',
+              border: '2.5px solid var(--accent-blue)',
+              borderRadius: '12px',
+              padding: '16px',
+              marginTop: '8px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                <span style={{ fontSize: '1.4rem', lineHeight: 1 }}>📢</span>
+                <div style={{ textAlign: 'left' }}>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-dark)' }}>Join WhatsApp Community (Required)</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '2px', lineHeight: '1.4' }}>
+                    Webinar entry links, reminders, and direct live updates will be sent exclusively inside this community.
+                  </div>
+                </div>
+              </div>
+              
+              <a 
+                href={CONFIG.webinar.whatsAppCommunityUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={() => setJoinedCommunity(true)}
+                className="btn-secondary" 
+                style={{ 
+                  display: 'inline-flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  gap: '8px', 
+                  padding: '10px 16px', 
+                  fontSize: '0.85rem',
+                  background: 'var(--accent-blue)',
+                  color: '#ffffff',
+                  borderColor: 'var(--border-silent)',
+                  boxShadow: '2px 2px 0 var(--border-silent)',
+                  textTransform: 'uppercase',
+                  fontWeight: 800,
+                  textDecoration: 'none',
+                  borderRadius: '9999px',
+                  cursor: 'pointer'
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.004 2c-5.518 0-9.998 4.479-9.998 9.997 0 2.006.592 3.868 1.613 5.438L2.09 22.06l4.787-1.53c1.488.89 3.224 1.41 5.127 1.41 5.52 0 10-4.482 10-10C22.004 6.479 17.522 2 12.004 2zm0 1.666c4.593 0 8.33 3.738 8.33 8.33 0 4.593-3.737 8.333-8.33 8.333-1.637 0-3.155-.47-4.444-1.28l-.317-.197-2.923.935.95-2.83-.223-.335c-.886-1.32-1.393-2.905-1.393-4.606 0-4.593 3.738-8.33 8.33-8.33z"/>
+                </svg>
+                Join WhatsApp Community
+              </a>
+
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-main)', textAlign: 'left' }}>
+                <input 
+                  type="checkbox" 
+                  checked={joinedCommunity} 
+                  onChange={(e) => setJoinedCommunity(e.target.checked)}
+                  style={{ width: '16px', height: '16px', accentColor: 'var(--accent-blue)', flexShrink: 0 }} 
+                />
+                <span>I have joined the WhatsApp community.</span>
+              </label>
+            </div>
+
+            <button 
+              type="submit" 
+              className="btn-primary" 
+              disabled={!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity}
+              style={{ 
+                marginTop: '16px', 
+                width: '100%',
+                boxShadow: (!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity) ? 'none' : '3px 3px 0 var(--border-silent)',
+                background: (!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity) ? '#e2e8f0' : 'var(--accent-cyan)',
+                color: (!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity) ? '#94a3b8' : '#ffffff',
+                borderColor: (!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity) ? '#cbd5e1' : 'var(--border-silent)',
+                cursor: (!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity) ? 'not-allowed' : 'pointer',
+                opacity: (!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity) ? 0.75 : 1
+              }}
+            >
               Send Verification Code
             </button>
           </form>
@@ -367,26 +443,6 @@ export default function Register() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <a 
-                href={CONFIG.webinar.whatsAppCommunityUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn-primary" 
-                style={{ width: '100%' }}
-              >
-                Join WhatsApp Community
-              </a>
-              <a 
-                href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Thinking+about+Tech+Webinar&dates=20260718T140000/20260718T150000&details=Hear+my+story+first.+Webinar+by+Irfan.&location=Online`}
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn-secondary" 
-                style={{ width: '100%' }}
-              >
-                Add to Calendar
-              </a>
-            </div>
           </div>
         )}
       </div>

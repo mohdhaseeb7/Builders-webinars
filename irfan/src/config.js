@@ -15,7 +15,7 @@ export const CONFIG = {
     venue: "ONLINE",
     address: "Hosted via Google Meet. The entry link and calendar invite will be sent directly to your registered contact.",
     googleMapsUrl: "https://calendar.google.com",
-    whatsAppCommunityUrl: "https://chat.whatsapp.com/mock-community-link",
+    whatsAppCommunityUrl: "https://chat.whatsapp.com/KEmf1JV8UPxEkKMrEikXRf?mode=gi_t",
     phone: "+91 98857 63040",
     email: "irfan.ahmed.4764@gmail.com",
     footerText: "© 2026 Irfan"
