@@ -1,0 +1,412 @@
+import React, { useState } from 'react';
+import { CONFIG } from '../config';
+
+export default function Register() {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    qualification: ''
+  });
+  const [otp, setOtp] = useState(['', '', '', '']);
+  const [otpError, setOtpError] = useState('');
+  const [seatNumber, setSeatNumber] = useState('');
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSendCode = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.phone || !formData.qualification) {
+      alert('Please fill out all fields first.');
+      return;
+    }
+    // Advance to OTP step
+    setStep(2);
+  };
+
+  const handleOtpChange = (index, value) => {
+    if (isNaN(value)) return;
+    const newOtp = [...otp];
+    newOtp[index] = value.substring(value.length - 1);
+    setOtp(newOtp);
+
+    // Auto-focus next input
+    if (value && index < 3) {
+      document.getElementById(`otp-${index + 1}`).focus();
+    }
+  };
+
+  const handleKeyDown = (index, e) => {
+    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+      document.getElementById(`otp-${index - 1}`).focus();
+    }
+  };
+
+  const handleVerifyOtp = (e) => {
+    e.preventDefault();
+    const enteredOtp = otp.join('');
+    
+    // Accept standard mock OTP '1234' (or let it accept any 4-digit code for convenience, but check for 1234 for realism)
+    if (enteredOtp === '1234' || enteredOtp === '2026') {
+      const generatedSeat = `CFI-${Math.floor(1000 + Math.random() * 9000)}`;
+      setSeatNumber(generatedSeat);
+      setOtpError('');
+      setStep(3);
+    } else {
+      setOtpError('Invalid code. Try entering 1234');
+    }
+  };
+
+  return (
+    <section className="section-narrow register-section" id="register">
+      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <h2 style={{ marginBottom: '8px' }}>Reserve Your Seat</h2>
+        <p className="section-subtitle" style={{ marginBottom: '0' }}>
+          {CONFIG.webinar.badge}. Seats are limited. Registration is mandatory.
+        </p>
+      </div>
+
+      <div className="glass-card" style={{ 
+        boxShadow: '0 20px 50px rgba(0, 242, 254, 0.15)',
+        border: '1px solid rgba(0, 242, 254, 0.2)',
+        position: 'relative'
+      }}>
+        {/* Step 1: Input details */}
+        {step === 1 && (
+          <form onSubmit={handleSendCode} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <label htmlFor="name" style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-muted)' }}>Full Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required 
+                value={formData.name}
+                onChange={handleInputChange}
+                placeholder="Enter your full name" 
+                style={inputStyle}
+              />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <label htmlFor="email" style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-muted)' }}>Email Address</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required 
+                value={formData.email}
+                onChange={handleInputChange}
+                placeholder="you@example.com" 
+                style={inputStyle}
+              />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <label htmlFor="phone" style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-muted)' }}>WhatsApp Number</label>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <span style={{ 
+                  background: 'rgba(255, 255, 255, 0.05)', 
+                  border: '1px solid var(--border-silent)',
+                  padding: '12px 16px',
+                  borderRadius: 'var(--radius-sm)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontSize: '0.95rem'
+                }}>+91</span>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  name="phone" 
+                  required 
+                  pattern="[0-9]{10}"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  placeholder="9876543210" 
+                  style={{ ...inputStyle, flex: 1 }}
+                />
+              </div>
+            </div>
+
+             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <label htmlFor="qualification" style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-muted)' }}>Your Background / Status</label>
+              <select 
+                id="qualification" 
+                name="qualification" 
+                required 
+                value={formData.qualification}
+                onChange={handleInputChange}
+                style={{ ...inputStyle, appearance: 'none', backgroundImage: 'url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%2394a3b8\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpolyline points=\'6 9 12 15 18 9\'%3E%3C/polyline%3E%3C/svg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center', backgroundSize: '16px' }}
+              >
+                <option value="" disabled>Select...</option>
+                <option value="Absolute Beginner">Absolute Beginner (No coding experience)</option>
+                <option value="College Student">College Student / Graduate</option>
+                <option value="Working Professional">Working Professional (Non-Tech)</option>
+                <option value="Self-Taught Coder">Self-Taught / Already learning</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <button type="submit" className="btn-primary" style={{ marginTop: '12px', width: '100%' }}>
+              Send Verification Code
+            </button>
+          </form>
+        )}
+
+        {/* Step 2: OTP verification */}
+        {step === 2 && (
+          <form onSubmit={handleVerifyOtp} style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
+            <div style={{ textAlign: 'center' }}>
+              <h3 style={{ fontSize: '1.4rem', marginBottom: '8px' }}>Enter Verification Code</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                We simulated sending a 4-digit code to <strong style={{ color: 'var(--text-main)' }}>{formData.email}</strong>.
+              </p>
+              <div style={{ 
+                background: 'rgba(79, 172, 254, 0.05)', 
+                border: '1px dashed rgba(79, 172, 254, 0.3)',
+                padding: '8px 16px',
+                borderRadius: 'var(--radius-sm)',
+                display: 'inline-block',
+                marginTop: '12px',
+                fontSize: '0.85rem',
+                color: 'var(--accent-cyan)'
+              }}>
+                🔑 Mock OTP Code: <strong style={{ letterSpacing: '1px' }}>1234</strong>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+              {otp.map((digit, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  id={`otp-${index}`}
+                  maxLength="1"
+                  required
+                  value={digit}
+                  onChange={(e) => handleOtpChange(index, e.target.value)}
+                  onKeyDown={(e) => handleKeyDown(index, e)}
+                  style={{
+                    width: '60px',
+                    height: '60px',
+                    textAlign: 'center',
+                    fontSize: '1.5rem',
+                    fontWeight: 'bold',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid var(--border-silent)',
+                    borderRadius: 'var(--radius-md)',
+                    color: 'var(--text-main)',
+                    outline: 'none',
+                    transition: 'var(--transition-smooth)'
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = 'var(--accent-cyan)'}
+                  onBlur={(e) => e.target.style.borderColor = 'var(--border-silent)'}
+                />
+              ))}
+            </div>
+
+            {otpError && (
+              <span style={{ color: '#ff5f56', fontSize: '0.9rem' }}>{otpError}</span>
+            )}
+
+            <div style={{ display: 'flex', gap: '12px', width: '100%' }}>
+              <button 
+                type="button" 
+                className="btn-secondary" 
+                onClick={() => setStep(1)} 
+                style={{ flex: 1 }}
+              >
+                Back
+              </button>
+              <button 
+                type="submit" 
+                className="btn-primary" 
+                style={{ flex: 2 }}
+              >
+                Verify & Reserve Seat
+              </button>
+            </div>
+          </form>
+        )}
+
+        {/* Step 3: Verified Admit Card */}
+        {step === 3 && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+            <div style={{ textAlign: 'center' }}>
+              <span style={{ 
+                color: 'var(--accent-green)', 
+                fontWeight: 'bold', 
+                fontSize: '1.1rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px'
+              }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Registration Confirmed!
+              </span>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+                Your entry pass is active. The webinar stream link is unlocked below.
+              </p>
+            </div>
+
+            {/* Boarding Pass Ticket UI */}
+            <div className="ticket-card" style={{
+              background: '#ffffff',
+              border: '1px solid var(--border-silent)',
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden',
+              boxShadow: '0 10px 30px rgba(43, 45, 53, 0.03)'
+            }}>
+              {/* Ticket Top */}
+              <div style={{
+                padding: '24px',
+                borderBottom: '2px dashed var(--border-silent)',
+                position: 'relative'
+              }}>
+                {/* Left ticket circle cut */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '-10px',
+                  left: '-10px',
+                  width: '20px',
+                  height: '20px',
+                  borderRadius: '50%',
+                  background: 'var(--bg-darker)',
+                  borderRight: '1px solid var(--border-silent)'
+                }}></div>
+                {/* Right ticket circle cut */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '-10px',
+                  right: '-10px',
+                  width: '20px',
+                  height: '20px',
+                  borderRadius: '50%',
+                  background: 'var(--bg-darker)',
+                  borderLeft: '1px solid var(--border-silent)'
+                }}></div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                  <span style={{ fontWeight: 800, fontFamily: 'var(--font-display)', fontSize: '0.9rem', letterSpacing: '0.5px' }}>
+                    {CONFIG.host.name}
+                  </span>
+                  <span style={{ 
+                    fontFamily: 'var(--font-mono)', 
+                    fontSize: '0.8rem', 
+                    color: 'var(--accent-cyan)',
+                    background: 'rgba(255, 122, 89, 0.05)',
+                    padding: '4px 10px',
+                    borderRadius: '4px',
+                    border: '1px solid rgba(255, 122, 89, 0.15)'
+                  }}>
+                    {seatNumber}
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase' }}>CANDIDATE</span>
+                    <span style={{ fontSize: '1.1rem', fontWeight: 600 }}>{formData.name}</span>
+                  </div>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                    <div>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase' }}>BACKGROUND</span>
+                      <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>{formData.qualification}</span>
+                    </div>
+                    <div>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase' }}>STREAM STARTS</span>
+                      <span style={{ fontSize: '0.9rem', fontWeight: 500, color: 'var(--accent-blue)' }}>1:45 PM IST</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Ticket Bottom */}
+              <div style={{ padding: '24px', background: '#faf9f6' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase' }}>WHEN</span>
+                    <span style={{ fontSize: '0.95rem', fontWeight: 600 }}>{CONFIG.webinar.date} · {CONFIG.webinar.time}</span>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase' }}>WHERE</span>
+                    <span style={{ fontSize: '0.9rem', color: 'var(--text-main)' }}>{CONFIG.webinar.venue}</span>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginTop: '2px' }}>{CONFIG.webinar.address}</span>
+                  </div>
+                </div>
+
+                {/* Simulated Barcode */}
+                <div style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  alignItems: 'center', 
+                  gap: '6px',
+                  borderTop: '1px solid var(--border-silent)',
+                  paddingTop: '16px'
+                }}>
+                  <div style={{ 
+                    fontFamily: 'var(--font-mono)', 
+                    letterSpacing: '3px', 
+                    fontSize: '1.2rem',
+                    color: 'rgba(0,0,0,0.2)',
+                    height: '24px',
+                    overflow: 'hidden'
+                  }}>
+                    ||||| | |||| ||| || |||| | ||| |
+                  </div>
+                  <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                    ENTRY PASS CONFIRMED
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <a 
+                href={CONFIG.webinar.whatsAppCommunityUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-primary" 
+                style={{ width: '100%' }}
+              >
+                Join WhatsApp Community
+              </a>
+              <a 
+                href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Communication+for+Tech+Success+Webinar&dates=20260725T180000/20260725T190000&details=Improve+your+interviews,+teamwork,+networking,+and+project+presentations+through+practical+communication+skills.+Webinar+by+Mirza.&location=Online&ctz=Asia/Kolkata`}
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-secondary" 
+                style={{ width: '100%' }}
+              >
+                Add to Calendar
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// Internal reusable input style
+const inputStyle = {
+  width: '100%',
+  padding: '12px 16px',
+  background: 'rgba(255, 255, 255, 0.03)',
+  border: '1px solid var(--border-silent)',
+  borderRadius: 'var(--radius-sm)',
+  color: 'var(--text-main)',
+  fontFamily: 'var(--font-sans)',
+  fontSize: '0.95rem',
+  outline: 'none',
+  transition: 'all 0.3s ease',
+  boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.2)'
+};
