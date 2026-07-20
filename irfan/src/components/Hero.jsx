@@ -12,8 +12,6 @@ export default function Hero() {
 
   return (
     <section className="section hero-section" style={{ paddingTop: '32px', paddingBottom: '60px', position: 'relative' }}>
-      {/* Blurred Game Controller Background */}
-      <div className="hero-controller-bg"></div>
 
       <div className="grid-2" style={{ alignItems: 'center', position: 'relative', zIndex: 2 }}>
         <div className="hero-content">
@@ -47,7 +45,7 @@ export default function Hero() {
               marginRight: '8px',
               display: 'inline-block'
             }}>from</span>
-            <span style={{ color: 'var(--accent-cyan)' }}>PLAYER</span>
+            <span style={{ color: 'var(--accent-cyan)' }}>GAMER</span>
             <br />
             <span className="font-serif-italic" style={{ 
               textTransform: 'none', 

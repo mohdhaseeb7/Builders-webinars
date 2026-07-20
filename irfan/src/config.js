@@ -4,7 +4,7 @@ import hostPhoto from './assets/host_photo.jpg';
 
 export const CONFIG = {
   webinar: {
-    title: "from PLAYER to PROGRAMMER",
+    title: "from GAMER to PROGRAMMER",
     subtitle: "Hear my story first. I started learning full-stack coding just 2 months ago with zero background. Let me share what the first 60 days are really like completely unfiltered.",
     ctaText: "Reserve My Free Seat",
     subCtaText: "(yes, actually free - seats really are limited ↴)",
