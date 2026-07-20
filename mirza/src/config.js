@@ -24,16 +24,14 @@ export const CONFIG = {
     name: "Mirza Abdullah Yaseen Baig",
     avatar: hostPhoto, // default premium avatar
     role: "Tech Communication Coach & Developer",
-    bio: "I help software engineers and tech professionals bridge the gap between technical expertise and impactful communication. Having coached developers on interview dialogue, technical storytelling, and professional visibility, I built this webinar to share a practical, structure-driven approach to developer soft skills.",
+    bio: "I help software engineers and tech professionals bridge the gap between technical expertise and impactful communication. I built this webinar to share a practical, structure-driven approach to developer soft skills.",
     highlights: [
-      "Coached developers on technical interview communication",
       "Pragmatic framework for networking and personal brand building",
       "Advocate for clear, empathetic collaboration in engineering teams"
     ],
     socials: {
-      github: "https://github.com/mirza-baig",
-      linkedin: "https://www.linkedin.com/in/mirza-abdullah-yaseen-baig/",
-      instagram: "https://www.instagram.com/mirza.communicates/"
+      linkedin: "https://www.linkedin.com/in/mirza-abdullah-43a206335/",
+      instagram: "https://www.instagram.com/nodenugget"
     }
   },
   painPoints: [
@@ -74,7 +72,7 @@ export const CONFIG = {
     {
       id: "01",
       title: "Confident Expression",
-      description: "Learn how to communicate your ideas with confidence during sprint meetings, architectural reviews, and user research sessions."
+      description: "Learn how to communicate your ideas with confidence"
     },
     {
       id: "02",
@@ -84,7 +82,7 @@ export const CONFIG = {
     {
       id: "03",
       title: "Impactful Presentations",
-      description: "Present your projects more effectively so that managers, stakeholders, and hackathon judges immediately grasp their value."
+      description: "Present your projects more effectively so that managers, and hackathon judges immediately grasp their value."
     },
     {
       id: "04",
@@ -132,10 +130,6 @@ export const CONFIG = {
     {
       question: "I'm a natural introvert. Will this help me?",
       answer: "Absolutely! Good communication is not about being loud, talkative, or extroverted. It is about applying clear, logical frameworks. We teach communication as a structured system, just like code."
-    },
-    {
-      question: "Will there be a recording available?",
-      answer: "This is a live online interactive session with practice exercises and real-time Q&A. Joining live is highly recommended to get the most value and have your questions answered directly."
     },
     {
       question: "Who is this session for?",

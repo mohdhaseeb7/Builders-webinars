@@ -3,65 +3,71 @@ import { CONFIG } from '../config';
 
 export default function ContentMap() {
   return (
-    <section className="section outcomes-section" id="outcomes">
+    <section className="section outcomes-section" id="outcomes" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
       <h2 style={{ marginBottom: '8px' }}>See What's Inside</h2>
       <p className="section-subtitle">
-        One hour. In-Person. You walk out with a crystal clear picture of starting in tech, a practical roadmap, and the confidence to take your first steps.
+        One hour. Online. You walk out with a crystal clear picture of developer communication, a practical roadmap, and the confidence to express your logic.
       </p>
 
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '24px',
+        gap: '28px',
         marginTop: '40px'
       }}>
         {CONFIG.outcomes.map((item, index) => (
           <div key={index} className="glass-card outcome-card" style={{
             position: 'relative',
-            overflow: 'hidden',
+            overflow: 'visible',
             display: 'flex',
             flexDirection: 'column',
             gap: '16px',
-            border: '1px solid var(--border-silent)'
+            border: '3px solid var(--border-silent)',
+            boxShadow: '5px 5px 0px var(--border-silent)',
+            background: '#ffffff',
+            borderRadius: '12px',
+            padding: '24px 20px',
+            transform: `rotate(${(index % 2 === 0 ? 1 : -1) * 1.5}deg)`
           }}>
-            {/* Background Glow */}
+            {/* Small piece of tape at the top center of each index card */}
             <div style={{
               position: 'absolute',
-              top: '-50px',
-              right: '-50px',
-              width: '120px',
-              height: '120px',
-              background: 'radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, transparent 70%)',
-              pointerEvents: 'none'
+              top: '-12px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '60px',
+              height: '20px',
+              background: 'rgba(124, 58, 237, 0.15)', /* soft violet tape */
+              border: '1px dashed rgba(0,0,0,0.1)'
             }}></div>
 
-            {/* Glowing Number */}
+            {/* Glowing/Slanted Big Number */}
             <span style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '2.5rem',
-              fontWeight: '800',
+              fontFamily: 'var(--font-display)',
+              fontSize: '2.8rem',
+              fontWeight: '900',
+              fontStyle: 'italic',
               lineHeight: '1',
-              background: 'linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              opacity: 0.8
+              color: 'var(--accent-purple)'
             }}>
               {item.id}
             </span>
 
             <div>
               <h3 style={{ 
-                fontSize: '1.2rem', 
+                fontSize: '1.25rem', 
                 marginBottom: '8px',
-                fontWeight: 600,
-                color: 'var(--text-main)'
+                fontWeight: '800',
+                color: 'var(--text-dark)',
+                fontStyle: 'italic',
+                textTransform: 'uppercase'
               }}>
                 {item.title}
               </h3>
               <p style={{ 
                 color: 'var(--text-muted)', 
                 fontSize: '0.9rem',
-                lineHeight: '1.6'
+                lineHeight: '1.5'
               }}>
                 {item.description}
               </p>
@@ -70,7 +76,7 @@ export default function ContentMap() {
         ))}
       </div>
       
-      {/* Dynamic CTA at the end of Outcomes */}
+      {/* Dynamic CTA at the end of Takeaways */}
       <div style={{
         marginTop: '60px',
         textAlign: 'center',
@@ -79,15 +85,10 @@ export default function ContentMap() {
         alignItems: 'center',
         gap: '16px'
       }}>
-        <p style={{ margin: '0', color: 'var(--text-dark)', fontSize: '1.05rem', fontWeight: 700 }}>
-          Ready to close your skill gap?
+        <p style={{ margin: '0', color: 'var(--text-dark)', fontSize: '1.1rem', fontWeight: 800, textTransform: 'uppercase', fontStyle: 'italic', fontFamily: 'var(--font-display)' }}>
+          Ready to close your communication gap?
         </p>
-        <a href="#register" className="btn-secondary" style={{
-          color: 'var(--text-dark)',
-          background: '#ffffff',
-          border: '3px solid var(--border-silent)',
-          boxShadow: '4px 4px 0px var(--border-silent)'
-        }} onClick={(e) => {
+        <a href="#register" className="btn-primary" onClick={(e) => {
           e.preventDefault();
           document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
         }}>

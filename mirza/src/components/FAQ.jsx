@@ -9,13 +9,13 @@ export default function FAQ() {
   };
 
   return (
-    <section className="section-narrow faq-section" id="faq" style={{ paddingBottom: '60px' }}>
+    <section className="section-narrow faq-section" id="faq" style={{ paddingBottom: '80px', paddingTop: '40px' }}>
       <h2 style={{ marginBottom: '8px' }}>Questions You Probably Have</h2>
       <p className="section-subtitle">
         Everything you need to know about the session, cleared up upfront.
       </p>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '30px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', marginTop: '30px' }}>
         {CONFIG.faqs.map((faq, index) => {
           const isOpen = openIndex === index;
           return (
@@ -23,10 +23,13 @@ export default function FAQ() {
               key={index} 
               className="glass-card" 
               style={{ 
-                padding: '20px 24px',
+                padding: '22px 24px',
                 cursor: 'pointer',
-                border: isOpen ? '1px solid rgba(0, 242, 254, 0.3)' : '1px solid var(--border-silent)',
-                background: isOpen ? 'rgba(22, 24, 37, 0.9)' : 'var(--bg-card)'
+                border: '3px solid var(--border-silent)',
+                background: isOpen ? 'var(--accent-purple-light)' : '#ffffff',
+                boxShadow: isOpen ? '3px 3px 0px var(--border-silent)' : '5px 5px 0px var(--border-silent)',
+                borderRadius: '12px',
+                transition: 'var(--transition-smooth)'
               }}
               onClick={() => toggleFAQ(index)}
             >
@@ -38,22 +41,24 @@ export default function FAQ() {
                 gap: '16px' 
               }}>
                 <h4 style={{ 
-                  fontSize: '1.05rem', 
-                  fontWeight: 600,
-                  color: isOpen ? 'var(--accent-cyan)' : 'var(--text-main)',
+                  fontSize: '1.1rem', 
+                  fontWeight: '800',
+                  color: '#000000',
+                  fontStyle: 'italic',
+                  textTransform: 'none',
                   transition: 'var(--transition-smooth)'
                 }}>{faq.question}</h4>
                 
                 <span style={{ 
                   transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', 
                   transition: 'var(--transition-smooth)',
-                  color: isOpen ? 'var(--accent-cyan)' : 'var(--text-muted)',
+                  color: isOpen ? 'var(--accent-purple)' : 'var(--text-muted)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0
                 }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </span>
@@ -61,17 +66,18 @@ export default function FAQ() {
 
               {/* Answer Content */}
               <div style={{
-                maxHeight: isOpen ? '200px' : '0',
+                maxHeight: isOpen ? '250px' : '0',
                 opacity: isOpen ? 1 : 0,
                 overflow: 'hidden',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                marginTop: isOpen ? '12px' : '0'
+                transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+                marginTop: isOpen ? '14px' : '0'
               }}>
                 <p style={{ 
                   color: 'var(--text-muted)', 
                   fontSize: '0.95rem', 
                   lineHeight: '1.6',
-                  margin: '0' 
+                  margin: '0',
+                  fontWeight: 500
                 }}>
                   {faq.answer}
                 </p>

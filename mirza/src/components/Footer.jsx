@@ -67,7 +67,6 @@ export default function Footer() {
             <a href="#outcomes" style={{ color: 'inherit', textDecoration: 'none' }}>Takeaways</a>
             <a href="#faq" style={{ color: 'inherit', textDecoration: 'none' }}>FAQs</a>
             <span style={{ color: 'var(--border-silent)' }}>|</span>
-            <a href={CONFIG.host.socials.github} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 500 }}>GitHub</a>
             <a href={CONFIG.host.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 500 }}>LinkedIn</a>
             <a href={CONFIG.host.socials.instagram} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 500 }}>Instagram</a>
           </div>

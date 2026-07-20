@@ -3,27 +3,31 @@ import { CONFIG } from '../config';
 
 export default function HostCard() {
   return (
-    <section className="section host-section" id="host">
+    <section className="section host-section" id="host" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
       <div className="glass-card" style={{ 
-        padding: '48px',
-        border: '1px solid var(--border-silent)',
-        background: 'var(--bg-card)',
+        padding: '48px 36px',
+        border: '3px solid var(--border-silent)',
+        background: '#ffffff',
         position: 'relative',
-        overflow: 'hidden'
+        borderRadius: '16px',
+        boxShadow: '8px 8px 0px var(--border-silent)',
+        marginTop: '20px'
       }}>
-        {/* Abstract shape */}
-        <div style={{
-          position: 'absolute',
-          bottom: '-30px',
-          left: '-30px',
-          width: '180px',
-          height: '180px',
-          background: 'radial-gradient(circle, rgba(255, 122, 89, 0.05) 0%, transparent 70%)',
-          pointerEvents: 'none'
-        }}></div>
+        {/* Spiral Notebook Binder Elements */}
+        <div className="spiral-binder">
+          <div className="spiral-ring"></div>
+          <div className="spiral-ring"></div>
+          <div className="spiral-ring"></div>
+          <div className="spiral-ring"></div>
+          <div className="spiral-ring"></div>
+          <div className="spiral-ring"></div>
+          <div className="spiral-ring"></div>
+          <div className="spiral-ring"></div>
+        </div>
 
-        <div className="grid-2" style={{ alignItems: 'center', gap: '48px' }}>
-          {/* Host image column */}
+        <div className="grid-2" style={{ alignItems: 'center', gap: '48px', marginTop: '10px' }}>
+          
+          {/* Left Column: Speaker Polaroid photo taped onto page */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -31,85 +35,98 @@ export default function HostCard() {
             justifyContent: 'center',
             position: 'relative'
           }}>
-            {/* Host Polaroid Card */}
+            {/* Adhesive tape effect on top of Polaroid */}
+            <div style={{
+              position: 'absolute',
+              top: '-15px',
+              left: '30px',
+              width: '90px',
+              height: '30px',
+              background: 'rgba(190, 242, 100, 0.4)', /* translucent lime green tape */
+              border: '1px dashed rgba(0, 0, 0, 0.15)',
+              transform: 'rotate(-15deg)',
+              zIndex: 5
+            }}></div>
+
+            {/* Host Polaroid Frame */}
             <div style={{
               background: '#ffffff',
               border: '3px solid var(--border-silent)',
-              padding: '16px 16px 36px 16px',
+              padding: '16px 16px 40px 16px',
               transform: 'rotate(-2deg)',
-              boxShadow: '8px 8px 0px var(--border-silent)',
-              width: '300px',
-              marginBottom: '20px',
+              boxShadow: '6px 6px 0px var(--border-silent)',
+              width: '290px',
+              maxWidth: '100%',
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center'
+              alignItems: 'center',
+              position: 'relative'
             }}>
-              {/* Actual Image */}
+              {/* Photo Frame */}
               <div style={{
                 width: '100%',
-                height: '240px',
-                border: '2px solid var(--border-silent)',
+                height: '250px',
+                border: '2.5px solid var(--border-silent)',
                 overflow: 'hidden',
-                background: '#faf9f6'
+                background: '#f2f1ef'
               }}>
                 <img 
                   src={CONFIG.host.avatar} 
                   alt={CONFIG.host.name} 
-                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
               
-              {/* Polaroid Caption */}
+              {/* Handwritten style tag inside Polaroid bottom */}
               <div style={{
                 marginTop: '16px',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                color: 'var(--text-dark)',
-                textAlign: 'center'
+                fontFamily: 'var(--font-display)',
+                fontSize: '1.2rem',
+                fontWeight: '800',
+                color: '#000000',
+                textAlign: 'center',
+                letterSpacing: '0.5px'
               }}>
+                {CONFIG.host.name.toUpperCase()}
               </div>
             </div>
           </div>
 
-          {/* Host content column */}
+          {/* Right Column: Host Info Content */}
           <div>
             <span style={{ 
               fontSize: '0.9rem', 
-              color: 'var(--accent-cyan)', 
-              fontWeight: 600,
+              color: 'var(--accent-purple)', 
+              fontWeight: 800,
               textTransform: 'uppercase',
-              letterSpacing: '0.1em',
+              letterSpacing: '0.15em',
               display: 'block',
-              marginBottom: '8px'
+              marginBottom: '10px'
             }}>
-              Meet Your Speaker
+              MEET YOUR SPEAKER
             </span>
             
             <h2 style={{ 
               textAlign: 'left', 
-              fontSize: '2.2rem', 
-              marginBottom: '4px',
-              fontWeight: 800
+              fontSize: '2.4rem', 
+              marginBottom: '6px',
+              fontWeight: '900',
+              lineHeight: '1.1'
             }}>
               {CONFIG.host.name}
             </h2>
             
-            <p style={{ 
-              color: 'var(--accent-blue)', 
-              fontSize: '1rem', 
-              fontWeight: 500,
-              marginBottom: '20px',
-              fontFamily: 'var(--font-mono)'
-            }}>
-              {CONFIG.host.role}
-            </p>
+            <div style={{ display: 'inline-block', marginBottom: '20px' }}>
+              <span className="highlighter-mark" style={{ transform: 'rotate(0.5deg)', fontSize: '0.95rem' }}>
+                {CONFIG.host.role}
+              </span>
+            </div>
 
             <p style={{ 
               color: 'var(--text-muted)', 
               fontSize: '1rem', 
-              lineHeight: '1.7', 
-              marginBottom: '24px' 
+              lineHeight: '1.65', 
+              marginBottom: '26px' 
             }}>
               {CONFIG.host.bio}
             </p>
@@ -117,14 +134,29 @@ export default function HostCard() {
             <div style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '12px'
+              gap: '12px',
+              marginBottom: '30px'
             }}>
               {CONFIG.host.highlights.map((highlight, index) => (
                 <div key={index} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '2px', flexShrink: 0 }}>
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span style={{ color: 'var(--text-main)', fontSize: '0.95rem' }}>{highlight}</span>
+                  <div style={{
+                    width: '24px',
+                    height: '24px',
+                    borderRadius: '50%',
+                    background: 'var(--accent-purple-light)',
+                    border: '2px solid #000000',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--accent-purple)',
+                    flexShrink: 0,
+                    marginTop: '2px'
+                  }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <span style={{ color: 'var(--text-main)', fontSize: '0.95rem', lineHeight: '1.4' }}>{highlight}</span>
                 </div>
               ))}
             </div>
@@ -134,22 +166,9 @@ export default function HostCard() {
               display: 'flex',
               gap: '12px',
               marginTop: '24px',
-              borderTop: '1px solid var(--border-silent)',
+              borderTop: '2px solid rgba(0,0,0,0.1)',
               paddingTop: '20px'
             }}>
-              {/* GitHub */}
-              <a 
-                href={CONFIG.host.socials.github} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                title="GitHub"
-                className="social-icon-link"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-              </a>
-
               {/* LinkedIn */}
               <a 
                 href={CONFIG.host.socials.linkedin} 

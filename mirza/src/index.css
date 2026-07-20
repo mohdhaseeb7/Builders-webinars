@@ -1,34 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Fira+Code:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,600;1,700;1,800;1,900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=Fira+Code:wght@400;500;600&display=swap');
 
 :root {
-  /* Colors - Neo-Brutalist Scrapbook Palette for Mirza */
-  --bg-darker: #fdfbf7; /* Warm Linen Paper */
-  --bg-dark: #ffffff; /* Pure White bands */
-  --bg-card: #ffffff; /* Crisp White cards */
+  /* Colors - Scrapbook Poster Palette for Mirza */
+  --bg-darker: #f2f1ef; /* Cool Grid Paper Background */
+  --bg-dark: #ffffff;
+  --bg-card: #ffffff;
   --bg-card-hover: #ffffff;
   
-  --accent-cyan: #1e3a8a; /* Deep Tech Navy */
-  --accent-blue: #f97316; /* Vibrant Tangerine/Orange */
-  --accent-purple: #fff7ed; /* Soft Peach Glow */
-  --accent-pink: #10b981; /* Vibrant Emerald Green */
-  --accent-green: #10b981; /* Vibrant Emerald Green */
+  --accent-purple: #7c3aed; /* Bold Violet/Purple from the poster */
+  --accent-purple-light: #f5f3ff;
+  --accent-lime: #bef264; /* Highlighter Lime Green from the poster */
+  --accent-lime-dark: #a3e635;
+  --accent-pink: #ec4899; /* Accent Highlight */
   
-  --text-main: #1a1a1a; /* Dark Charcoal */
-  --text-muted: #4d4d4d; /* Muted Slate */
-  --text-dark: #000000; /* Pure Black */
+  --text-main: #1a1a1a;
+  --text-muted: #4b5563;
+  --text-dark: #000000;
   
-  --border-silent: #1a1a1a; /* Thick Black Borders */
+  --border-silent: #000000; /* Solid Black Borders */
   
   /* Fonts */
-  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Barlow Condensed', sans-serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'Fira Code', monospace;
   
   /* Layout */
   --container-width: 1100px;
   --container-narrow: 760px;
-  --radius-lg: 12px;
-  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-md: 10px;
   --radius-sm: 6px;
   
   --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -43,6 +43,10 @@
 
 body {
   background-color: var(--bg-darker);
+  background-image: 
+    linear-gradient(90deg, rgba(124, 58, 237, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(124, 58, 237, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--text-main);
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -54,7 +58,6 @@ body {
 .app-container {
   min-height: 100vh;
   position: relative;
-  background-color: var(--bg-darker);
 }
 
 /* Section styling with brutalist colors */
@@ -78,22 +81,22 @@ body {
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text-dark);
+  font-style: italic;
   text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--text-dark);
+  line-height: 1.1;
 }
 
 h1 {
-  font-size: clamp(2.8rem, 6vw, 4.5rem);
-  line-height: 1.0;
+  font-size: clamp(3rem, 7vw, 5rem);
   margin-bottom: 24px;
 }
 
 h2 {
-  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
   margin-bottom: 16px;
   text-align: center;
-  line-height: 1.1;
 }
 
 .section-subtitle {
@@ -107,27 +110,22 @@ h2 {
   margin-right: auto;
 }
 
-/* Highlight tags */
-.text-gradient-cyan-blue {
-  color: var(--accent-cyan);
-  background: none;
-  -webkit-background-clip: unset;
-  background-clip: unset;
-  -webkit-text-fill-color: unset;
-  text-decoration: underline;
-  text-decoration-color: var(--accent-blue);
-  text-decoration-thickness: 4px;
+/* Highlight elements */
+.highlighter-mark {
+  background: var(--accent-lime);
+  padding: 2px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  transform: rotate(-1.5deg);
+  color: var(--text-dark);
+  font-weight: 700;
 }
 
-.text-gradient-purple-pink {
-  color: var(--accent-cyan);
-  background: none;
-  -webkit-background-clip: unset;
-  background-clip: unset;
-  -webkit-text-fill-color: unset;
+.text-gradient-purple {
+  color: var(--accent-purple);
 }
 
-/* Neo-Brutalist Cards */
+/* Neo-Brutalist Scrapbook Cards */
 .glass-card {
   background: var(--bg-card);
   border: 3px solid var(--border-silent);
@@ -135,6 +133,7 @@ h2 {
   padding: 32px;
   transition: var(--transition-smooth);
   box-shadow: 6px 6px 0px var(--border-silent);
+  position: relative;
 }
 
 .glass-card:hover {
@@ -148,13 +147,14 @@ h2 {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: var(--accent-cyan);
-  color: #ffffff;
+  background: var(--accent-lime);
+  color: var(--text-dark);
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.1rem;
-  padding: 16px 36px;
-  border-radius: 9999px;
+  font-style: italic;
+  font-size: 1.2rem;
+  padding: 14px 32px;
+  border-radius: 12px;
   border: 3px solid var(--border-silent);
   cursor: pointer;
   transition: var(--transition-smooth);
@@ -166,7 +166,7 @@ h2 {
 .btn-primary:hover {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0px var(--border-silent);
-  background: #1e40af;
+  background: var(--accent-lime-dark);
 }
 
 .btn-primary:active {
@@ -181,11 +181,11 @@ h2 {
   gap: 8px;
   background: #ffffff;
   color: var(--text-dark);
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-weight: 700;
-  font-size: 1rem;
-  padding: 12px 28px;
-  border-radius: 9999px;
+  font-size: 0.95rem;
+  padding: 10px 24px;
+  border-radius: 8px;
   border: 3px solid var(--border-silent);
   cursor: pointer;
   transition: var(--transition-smooth);
@@ -199,26 +199,22 @@ h2 {
   box-shadow: 4px 4px 0px var(--border-silent);
 }
 
-.btn-secondary:active {
-  transform: translate(1px, 1px);
-  box-shadow: 2px 2px 0px var(--border-silent);
-}
-
 /* Badges */
 .badge-outline {
   display: inline-block;
   padding: 8px 18px;
-  border-radius: 9999px;
+  border-radius: 8px;
   border: 3px solid var(--border-silent);
-  color: var(--text-dark);
+  color: #ffffff;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 0.85rem;
+  font-style: italic;
+  font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: var(--accent-blue);
+  background: var(--accent-purple);
   margin-bottom: 20px;
-  box-shadow: 2px 2px 0px var(--border-silent);
+  box-shadow: 3px 3px 0px var(--border-silent);
 }
 
 /* Grid Utilities */
@@ -250,7 +246,7 @@ h2 {
   border-left: 3px solid var(--border-silent);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-cyan);
+  background: var(--accent-purple);
   border: 3px solid var(--border-silent);
 }
 
@@ -273,12 +269,27 @@ h2 {
 
 .social-icon-link:hover {
   color: #ffffff;
-  background-color: var(--accent-cyan);
+  background-color: var(--accent-purple);
   transform: translate(-2px, -2px);
   box-shadow: 4px 4px 0px var(--border-silent);
 }
 
-.social-icon-link:active {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px var(--border-silent);
+/* Spiral notepad accent top */
+.spiral-binder {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: -14px;
+  left: 5%;
+  width: 90%;
+  pointer-events: none;
 }
+.spiral-ring {
+  width: 12px;
+  height: 24px;
+  background: #cbd5e1;
+  border: 2px solid #000;
+  border-radius: 6px;
+  box-shadow: 1px 1px 0px #000;
+}
+

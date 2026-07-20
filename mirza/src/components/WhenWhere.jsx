@@ -3,7 +3,7 @@ import { CONFIG } from '../config';
 
 export default function WhenWhere() {
   return (
-    <section className="section outcomes-section" id="schedule" style={{ paddingTop: '60px', paddingBottom: '60px' }}>
+    <section className="section outcomes-section" id="schedule" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
       <h2 style={{ marginBottom: '8px' }}>When & Where</h2>
       <p className="section-subtitle">
         Lock in the schedule and prepare your setup. No travel needed.
@@ -16,17 +16,22 @@ export default function WhenWhere() {
           flexDirection: 'column',
           gap: '20px',
           alignItems: 'flex-start',
-          borderLeft: '4px solid var(--accent-cyan)'
+          border: '3px solid var(--border-silent)',
+          borderLeft: '8px solid var(--accent-purple)',
+          boxShadow: '5px 5px 0px var(--border-silent)',
+          background: '#ffffff',
+          borderRadius: '12px'
         }}>
           <div style={{
             width: '48px',
             height: '48px',
-            borderRadius: '12px',
-            background: 'rgba(255, 122, 89, 0.08)',
+            borderRadius: '8px',
+            background: 'var(--accent-purple-light)',
+            border: '2px solid #000000',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'var(--accent-cyan)'
+            color: 'var(--accent-purple)'
           }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -37,29 +42,14 @@ export default function WhenWhere() {
           </div>
 
           <div>
-            <h3 style={{ fontSize: '1.3rem', marginBottom: '8px' }}>When</h3>
-            <p style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-dark)' }}>
+            <h3 style={{ fontSize: '1.4rem', marginBottom: '6px', fontStyle: 'italic' }}>When</h3>
+            <p style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-dark)' }}>
               {CONFIG.webinar.date}
             </p>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginTop: '4px' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginTop: '4px', fontWeight: 600 }}>
               {CONFIG.webinar.time} {CONFIG.webinar.timeSub}
             </p>
           </div>
-
-          <a 
-            href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Communication+for+Tech+Success+Webinar&dates=20260725T180000/20260725T190000&details=Improve+your+interviews,+teamwork,+networking,+and+project+presentations+through+practical+communication+skills.+Webinar+by+Mirza.&location=Online&ctz=Asia/Kolkata`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-secondary"
-            style={{ 
-              fontSize: '0.85rem', 
-              padding: '8px 16px',
-              borderColor: 'rgba(255, 122, 89, 0.25)',
-              color: 'var(--accent-cyan)'
-            }}
-          >
-            Add to Calendar
-          </a>
         </div>
 
         {/* Where Card */}
@@ -68,17 +58,22 @@ export default function WhenWhere() {
           flexDirection: 'column',
           gap: '20px',
           alignItems: 'flex-start',
-          borderLeft: '4px solid var(--accent-blue)'
+          border: '3px solid var(--border-silent)',
+          borderLeft: '8px solid var(--accent-lime-dark)',
+          boxShadow: '5px 5px 0px var(--border-silent)',
+          background: '#ffffff',
+          borderRadius: '12px'
         }}>
           <div style={{
             width: '48px',
             height: '48px',
-            borderRadius: '12px',
-            background: 'rgba(64, 123, 103, 0.08)',
+            borderRadius: '8px',
+            background: 'var(--accent-purple-light)',
+            border: '2px solid #000000',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'var(--accent-blue)'
+            color: 'var(--accent-purple)'
           }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="23 7 16 12 23 17 23 7"></polygon>
@@ -87,11 +82,11 @@ export default function WhenWhere() {
           </div>
 
           <div>
-            <h3 style={{ fontSize: '1.3rem', marginBottom: '8px' }}>Where</h3>
-            <p style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-dark)' }}>
+            <h3 style={{ fontSize: '1.4rem', marginBottom: '6px', fontStyle: 'italic' }}>Where</h3>
+            <p style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-dark)' }}>
               {CONFIG.webinar.venue}
             </p>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginTop: '4px', lineHeight: '1.6' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginTop: '4px', lineHeight: '1.5' }}>
               {CONFIG.webinar.address}
             </p>
           </div>
@@ -102,8 +97,8 @@ export default function WhenWhere() {
             style={{ 
               fontSize: '0.85rem', 
               padding: '8px 16px',
-              borderColor: 'rgba(64, 123, 103, 0.25)',
-              color: 'var(--accent-blue)'
+              color: 'var(--text-dark)',
+              borderRadius: '6px'
             }}
             onClick={(e) => {
               e.preventDefault();
