@@ -160,13 +160,10 @@ export default function Register() {
               flexDirection: 'column',
               gap: '12px'
             }}>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <span style={{ fontSize: '1.4rem', lineHeight: 1 }}>📢</span>
-                <div style={{ textAlign: 'left' }}>
-                  <div style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-dark)' }}>Join WhatsApp Community (Required)</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '2px', lineHeight: '1.4' }}>
-                    Webinar entry links, reminders, and direct live updates will be sent exclusively inside this community.
-                  </div>
+              <div style={{ textAlign: 'left' }}>
+                <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-dark)' }}>Join WhatsApp Community (Required)</div>
+                <div style={{ fontSize: '0.85rem', color: '#334155', marginTop: '2px', lineHeight: '1.45', fontWeight: 600 }}>
+                  Webinar entry links, reminders, and direct live updates will be sent exclusively inside this community.
                 </div>
               </div>
               
@@ -249,7 +246,7 @@ export default function Register() {
                 fontSize: '0.85rem',
                 color: 'var(--accent-cyan)'
               }}>
-                🔑 Mock OTP Code: <strong style={{ letterSpacing: '1px' }}>1234</strong>
+                Mock OTP Code: <strong style={{ letterSpacing: '1px' }}>1234</strong>
               </div>
             </div>
 

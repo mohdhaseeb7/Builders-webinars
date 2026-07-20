@@ -7,7 +7,7 @@ export const CONFIG = {
     title: "from GAMER to PROGRAMMER",
     subtitle: "Hear my story first. I started learning full-stack coding just 2 months ago with zero background. Let me share what the first 60 days are really like completely unfiltered.",
     ctaText: "Reserve My Free Seat",
-    subCtaText: "(yes, actually free - seats really are limited ↴)",
+    subCtaText: "(yes, actually free - seats really are limited)",
     badge: "Free Online Webinar",
     date: "TBD",
     time: "TBD",
@@ -23,7 +23,7 @@ export const CONFIG = {
   host: {
     name: "Mohammed Irfan Ahmed",
     avatar: hostPhoto, // default premium avatar
-    role: "Full-Stack Developer (Learning for 2 Months)",
+    role: "Full-Stack Developer",
     bio: "I was a full-time gamer spending hours a day before I decided to drop the games and learn full-stack. Having experienced the confusion of shifting from screens to code first-hand, I built this webinar to show you the exact, practical roadmap I used to go from a player to a programmer in just 60 days.",
     highlights: [
       "Started learning full-stack 2 months ago",
@@ -39,7 +39,7 @@ export const CONFIG = {
   painPoints: [
     {
       sender: "PG",
-      senderName: "Where do I even start? HTML? Python? AI? 🤯",
+      senderName: "Where do I even start? HTML? Python? AI?",
       subtitle: "you, and 214 others",
       text: "There are 100 different languages and 1000 different opinions on LinkedIn.",
       subText: "Trying to choose your first tutorial feels like choosing a college major all over again. You spend more time researching how to learn than actually writing code.",

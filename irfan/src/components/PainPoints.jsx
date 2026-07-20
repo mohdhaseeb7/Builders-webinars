@@ -40,7 +40,7 @@ export default function PainPoints() {
             PG
           </div>
           <div>
-            <h4 style={{ fontSize: '1rem', margin: '0' }}>Placement Group 😮💨</h4>
+            <h4 style={{ fontSize: '1rem', margin: '0' }}>Placement Group</h4>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>you, and 214 others</span>
           </div>
         </div>

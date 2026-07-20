@@ -13,6 +13,7 @@ export default function Register() {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [otpError, setOtpError] = useState('');
   const [seatNumber, setSeatNumber] = useState('');
+  const [joinedCommunity, setJoinedCommunity] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +25,10 @@ export default function Register() {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone || !formData.qualification) {
       setValidationError('Please fill out all fields first.');
+      return;
+    }
+    if (!joinedCommunity) {
+      setValidationError('Please join the WhatsApp community and check the box to proceed.');
       return;
     }
     // Advance to OTP step
@@ -203,7 +208,82 @@ export default function Register() {
               </select>
             </div>
 
-            <button type="submit" className="btn-primary" style={{ marginTop: '12px', width: '100%' }}>
+            {/* WhatsApp Community Box */}
+            <div style={{
+              background: '#f8fafc',
+              border: '2.5px solid #000000',
+              borderRadius: '12px',
+              padding: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
+              marginTop: '8px',
+              boxShadow: '3px 3px 0px #000000'
+            }}>
+              <div>
+                <h4 style={{ fontSize: '0.95rem', color: '#000000', margin: 0, fontWeight: 900, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  Join WhatsApp Community (Required)
+                </h4>
+                <p style={{ fontSize: '0.85rem', color: '#1e293b', margin: '4px 0 0 0', lineHeight: '1.45', fontWeight: 600 }}>
+                  Webinar entry links, reminders, and direct live updates will be sent exclusively inside this community.
+                </p>
+              </div>
+
+              <a 
+                href={CONFIG.webinar.whatsAppCommunityUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ 
+                  display: 'inline-flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  gap: '8px', 
+                  padding: '12px 18px', 
+                  fontSize: '0.9rem',
+                  background: 'var(--accent-lime)',
+                  color: '#000000',
+                  border: '2.5px solid #000000',
+                  boxShadow: '3px 3px 0 #000000',
+                  textTransform: 'uppercase',
+                  fontWeight: 900,
+                  textDecoration: 'none',
+                  borderRadius: '9999px',
+                  cursor: 'pointer',
+                  fontFamily: 'var(--font-display)',
+                  fontStyle: 'italic'
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.004 2c-5.518 0-9.998 4.479-9.998 9.997 0 2.006.592 3.868 1.613 5.438L2.09 22.06l4.787-1.53c1.488.89 3.224 1.41 5.127 1.41 5.52 0 10-4.482 10-10C22.004 6.479 17.522 2 12.004 2zm0 1.666c4.593 0 8.33 3.738 8.33 8.33 0 4.593-3.737 8.333-8.33 8.333-1.637 0-3.155-.47-4.444-1.28l-.317-.197-2.923.935.95-2.83-.223-.335c-.886-1.32-1.393-2.905-1.393-4.606 0-4.593 3.738-8.33 8.33-8.33z"/>
+                </svg>
+                JOIN WHATSAPP COMMUNITY
+              </a>
+
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 700, color: '#000000', textAlign: 'left', marginTop: '4px' }}>
+                <input 
+                  type="checkbox" 
+                  checked={joinedCommunity} 
+                  onChange={(e) => {
+                    setJoinedCommunity(e.target.checked);
+                    setValidationError('');
+                  }}
+                  style={{ width: '18px', height: '18px', accentColor: 'var(--accent-purple)', flexShrink: 0, cursor: 'pointer' }} 
+                />
+                <span>I have joined the WhatsApp community.</span>
+              </label>
+            </div>
+
+            <button 
+              type="submit" 
+              className="btn-primary" 
+              disabled={!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity}
+              style={{ 
+                marginTop: '12px', 
+                width: '100%',
+                opacity: (!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity) ? 0.6 : 1,
+                cursor: (!formData.name || !formData.email || !formData.phone || !formData.qualification || !joinedCommunity) ? 'not-allowed' : 'pointer'
+              }}
+            >
               Send Verification Code
             </button>
           </form>
@@ -228,7 +308,7 @@ export default function Register() {
                 color: 'var(--accent-purple)',
                 fontWeight: 700
               }}>
-                🔑 Mock OTP Code: <strong style={{ letterSpacing: '1px' }}>1234</strong>
+                Mock OTP Code: <strong style={{ letterSpacing: '1px' }}>1234</strong>
               </div>
             </div>
 

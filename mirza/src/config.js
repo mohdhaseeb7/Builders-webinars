@@ -7,7 +7,7 @@ export const CONFIG = {
     title: "Communication for Tech Success",
     subtitle: "Technical skills may get you started, but communication helps you grow. Discover how developers can improve interviews, teamwork, networking, and project presentations through practical communication skills that make a real impact in the tech industry.",
     ctaText: "Reserve My Free Seat",
-    subCtaText: "(yes, actually free - seats really are limited ↴)",
+    subCtaText: "(yes, actually free - seats really are limited)",
     badge: "Free Online Webinar",
     date: "Saturday, 25 July",
     time: "6:00 PM IST",
@@ -15,7 +15,7 @@ export const CONFIG = {
     venue: "Live Online",
     address: "Hosted via Google Meet. The entry link and calendar invite will be sent directly to your registered contact.",
     googleMapsUrl: "https://calendar.google.com",
-    whatsAppCommunityUrl: "https://chat.whatsapp.com/mock-comm-link-mirza",
+    whatsAppCommunityUrl: "https://chat.whatsapp.com/HnGnDvLHTSj6UzDdrWvPyh?s=sw&p=i&mlu=0&ilr=0",
     phone: "+91 98765 43210",
     email: "mirza.yaseen.baig@gmail.com",
     footerText: "© 2026 Mirza Abdullah Yaseen Baig"
@@ -23,7 +23,7 @@ export const CONFIG = {
   host: {
     name: "Mirza Abdullah Yaseen Baig",
     avatar: hostPhoto, // default premium avatar
-    role: "Tech Communication Coach & Developer",
+    role: "Full-Stack Developer",
     bio: "I help software engineers and tech professionals bridge the gap between technical expertise and impactful communication. I built this webinar to share a practical, structure-driven approach to developer soft skills.",
     highlights: [
       "Pragmatic framework for networking and personal brand building",
@@ -37,7 +37,7 @@ export const CONFIG = {
   painPoints: [
     {
       sender: "PG",
-      senderName: "Why does networking feel so fake and cringe? 😵‍💫",
+      senderName: "Why does networking feel so fake and cringe?",
       subtitle: "you, and 214 others",
       text: "I want to share my work and grow my network on LinkedIn, but writing updates feels like bragging.",
       subText: "You see people posting hyper-inflated stories about writing their first loops, and you just want to focus on engineering. But you know that professional visibility is what brings opportunities.",
